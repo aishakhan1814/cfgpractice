@@ -8,6 +8,14 @@ export type InteractionType =
   | 'emergency_support' 
   | 'other';
 
+export interface TriageSignal {
+  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM';
+  primaryReason: string;
+  humanStory: string;
+  urgencyBadge: string;
+  suggestedAction: string;
+}
+
 export interface Interaction {
   id: string;
   beneficiaryId: string;
@@ -26,6 +34,26 @@ export interface ActivityParticipation {
   date: string;
   category: 'social' | 'digital_literacy' | 'health_camp' | 'wellness' | 'civic_services';
   attended: boolean;
+  personalExperience?: string;
+}
+
+export interface CommunityActivity {
+  id: string;
+  title: string;
+  category: 'social' | 'digital_literacy' | 'health_camp' | 'wellness' | 'civic_services';
+  categoryLabel: string;
+  categoryColor: string;
+  date: string;
+  location: string;
+  attendeesCount: number;
+  status: 'Ongoing' | 'Completed' | 'Upcoming' | 'Registration Open';
+  story: string;
+  elderQuote: {
+    quote: string;
+    author: string;
+    neighborhood: string;
+  };
+  communityOutcome: string;
 }
 
 export interface Volunteer {
@@ -33,6 +61,16 @@ export interface Volunteer {
   name: string;
   phone: string;
   neighborhood: string;
+  skills?: string[];
+  languages?: string[];
+  hoursContributed?: number;
+  spotlightBadge?: string;
+  elderTestimonial?: {
+    quote: string;
+    elderName: string;
+  };
+  isSpotlight?: boolean;
+  role?: string;
 }
 
 export interface Beneficiary {
@@ -55,6 +93,9 @@ export interface Beneficiary {
   assignedVolunteer?: Volunteer;
   needsAttentionReason?: string;
   notesSummary?: string;
+  lifeStorySnippet?: string;
+  healthRemarks?: string;
+  triageSignal?: TriageSignal;
   interactions: Interaction[];
   activities: ActivityParticipation[];
   joinedDate: string;

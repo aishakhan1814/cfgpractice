@@ -31,29 +31,55 @@ export const CoordinatorDashboard: React.FC<CoordinatorDashboardProps> = ({
   return (
     <div className="space-y-6">
       {/* Welcome & NGO Context Header */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
-        <div>
-          <div className="flex items-center gap-2 text-emerald-700 font-semibold text-xs uppercase tracking-wider">
-            <Heart className="h-4 w-4 fill-emerald-600 text-emerald-600" />
-            <span>Saathi Foundation • Chennai Chapter</span>
+      <div className="rounded-2xl border border-emerald-200/80 bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 p-6 text-white shadow-md relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-emerald-700/60 px-3 py-1 text-xs font-semibold text-emerald-100 backdrop-blur-xs border border-emerald-600/40">
+              <Heart className="h-3.5 w-3.5 fill-rose-400 text-rose-400" />
+              <span>Saathi Foundation • Chennai Elderly Care Network</span>
+            </div>
+            
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+              "No Elder Left Behind in Silence."
+            </h1>
+            
+            <p className="text-sm text-emerald-100/90 leading-relaxed">
+              Every card below is not just a statistic — it is an elder in Mylapore, Royapettah, or T. Nagar who contributed decades to our society. Our explainable triage surfaces changes in routine before acute isolation sets in.
+            </p>
           </div>
-          <h1 className="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-            Coordinator Overview & Engagement Hub
-          </h1>
-          <p className="mt-0.5 text-xs text-slate-500">
-            Real-time monitoring across 3,000+ urban elderly citizens to prevent isolation.
-          </p>
+
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+            <button
+              type="button"
+              onClick={onNavigateToDirectory}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-emerald-950 shadow-sm hover:bg-emerald-50 transition-colors"
+            >
+              <UserCheck className="h-4 w-4 text-emerald-700" />
+              <span>Beneficiary Registry</span>
+            </button>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={onNavigateToDirectory}
-            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 transition-colors"
-          >
-            <UserCheck className="h-4 w-4" />
-            <span>Browse All Beneficiaries</span>
-          </button>
+        {/* Empathy & Community Impact Strip */}
+        <div className="mt-6 pt-5 border-t border-emerald-700/50 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="rounded-xl bg-white/10 backdrop-blur-xs p-3 border border-white/10">
+            <div className="text-xl sm:text-2xl font-black text-white">3,420+</div>
+            <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">Warm Check-ins Done</div>
+          </div>
+          <div className="rounded-xl bg-white/10 backdrop-blur-xs p-3 border border-white/10">
+            <div className="text-xl sm:text-2xl font-black text-amber-300">18 Hubs</div>
+            <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">Chennai Circles</div>
+          </div>
+          <div className="rounded-xl bg-white/10 backdrop-blur-xs p-3 border border-white/10">
+            <div className="text-xl sm:text-2xl font-black text-emerald-300">98.4%</div>
+            <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">48h Resolution Rate</div>
+          </div>
+          <div className="rounded-xl bg-white/10 backdrop-blur-xs p-3 border border-white/10">
+            <div className="text-xl sm:text-2xl font-black text-white">100% Dignity</div>
+            <div className="text-[11px] text-emerald-200 uppercase tracking-wider font-semibold">Zero Elders Forgotten</div>
+          </div>
         </div>
       </div>
 

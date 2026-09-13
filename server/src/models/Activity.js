@@ -9,10 +9,19 @@ const activitySchema = new mongoose.Schema(
       enum: ['social', 'digital_literacy', 'health_camp', 'wellness', 'civic_services'],
       required: true,
     },
+    categoryLabel: { type: String },
+    categoryColor: { type: String },
     date: { type: String, required: true },
     location: { type: String, required: true },
     attendeesCount: { type: Number, default: 0 },
     status: { type: String, default: 'Upcoming' },
+    story: { type: String },
+    elderQuote: {
+      quote: String,
+      author: String,
+      neighborhood: String,
+    },
+    communityOutcome: { type: String },
   },
   { timestamps: true }
 );

@@ -8,6 +8,11 @@ const volunteerSchema = new mongoose.Schema(
     neighborhood: { type: String, required: true },
     skills: [{ type: String }],
     languages: [{ type: String }],
+    hoursContributed: { type: Number, default: 0 },
+    role: { type: String },
+    isSpotlight: { type: Boolean, default: false },
+    spotlightBadge: { type: String },
+    elderTestimonial: { type: mongoose.Schema.Types.Mixed },
     active: { type: Boolean, default: true },
   },
   { timestamps: true }

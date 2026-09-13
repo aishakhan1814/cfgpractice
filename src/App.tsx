@@ -7,6 +7,7 @@ import { BeneficiaryDetail } from './components/beneficiaries/BeneficiaryDetail'
 import { InteractionModal } from './components/interactions/InteractionModal';
 import { VolunteerOverview } from './components/volunteers/VolunteerOverview';
 import { ActivityList } from './components/activities/ActivityList';
+import { JoinSaathiPage } from './components/join/JoinSaathiPage';
 import { beneficiaryService } from './services/beneficiaryService';
 import { Beneficiary, DashboardMetrics, BeneficiaryFilters, EngagementStatus, InteractionType } from './types/beneficiary';
 import { CheckCircle2 } from 'lucide-react';
@@ -233,6 +234,9 @@ export const App: React.FC = () => {
           ) : currentTab === 'activities' ? (
             /* Activity Directory */
             <ActivityList onFilterByActivity={handleFilterByActivity} />
+          ) : currentTab === 'join_saathi' ? (
+            /* Join Saathi Movement */
+            <JoinSaathiPage />
           ) : null}
         </main>
       </div>

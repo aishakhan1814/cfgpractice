@@ -1,115 +1,104 @@
 import React from 'react';
-import { Calendar, Users, MapPin, CheckCircle2 } from 'lucide-react';
+import { Calendar, Users, MapPin, CheckCircle2, Quote, Sparkles } from 'lucide-react';
+import { MOCK_COMMUNITY_ACTIVITIES } from '../../services/mockData';
 
 interface ActivitySnapshotProps {
   onFilterByActivity?: (category: string) => void;
 }
 
 export const ActivitySnapshot: React.FC<ActivitySnapshotProps> = ({ onFilterByActivity }) => {
-  const activities = [
-    {
-      id: '1',
-      title: 'Chai & Chat Senior Social Circle',
-      category: 'social',
-      categoryLabel: 'Social Engagement',
-      categoryColor: 'bg-blue-50 text-blue-700 border-blue-200',
-      date: 'Weekly • Every Sunday 4:30 PM',
-      location: 'Mylapore Community Hall',
-      attendees: 28,
-      status: 'Ongoing',
-    },
-    {
-      id: '2',
-      title: 'Digital Literacy: Smartphone & Online Safety',
-      category: 'digital_literacy',
-      categoryLabel: 'Digital Literacy',
-      categoryColor: 'bg-purple-50 text-purple-700 border-purple-200',
-      date: 'Sept 11, 2026',
-      location: 'Anna Nagar Library Center',
-      attendees: 19,
-      status: 'Completed',
-    },
-    {
-      id: '3',
-      title: 'Geriatric Health & Free Blood Pressure Camp',
-      category: 'health_camp',
-      categoryLabel: 'Health & Wellness',
-      categoryColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      date: 'Sept 18, 2026 (Upcoming)',
-      location: 'Adyar Primary Health Pavilion',
-      attendees: 35,
-      status: 'Registration Open',
-    },
-    {
-      id: '4',
-      title: 'Pension & Civic Documentation Helpdesk',
-      category: 'civic_services',
-      categoryLabel: 'Civic Services',
-      categoryColor: 'bg-amber-50 text-amber-700 border-amber-200',
-      date: 'Monthly • 1st Saturday',
-      location: 'T. Nagar Seva Samithi',
-      attendees: 16,
-      status: 'Completed',
-    },
-  ];
-
   return (
-    <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="rounded-lg bg-emerald-100 p-2 text-emerald-800">
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-6 space-y-5">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-4">
+        <div className="flex items-center gap-3">
+          <div className="rounded-xl bg-emerald-100 p-2.5 text-emerald-800">
             <Calendar className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900">Community Program Snapshot</h3>
-            <p className="text-xs text-slate-500">Key outreach activities combating loneliness</p>
+            <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <span>Community Circles & Real Experiences</span>
+              <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700">
+                Weekly Engagement
+              </span>
+            </h3>
+            <p className="text-xs text-slate-500">
+              Beyond attendance numbers: the stories, laughter, and friendships rekindled among our seniors
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {activities.map((act) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {MOCK_COMMUNITY_ACTIVITIES.slice(0, 4).map((act) => (
           <div
             key={act.id}
-            className="rounded-xl border border-slate-100 bg-slate-50/50 p-4 hover:bg-slate-50 transition-colors flex flex-col justify-between"
+            className="rounded-2xl border border-slate-200/80 bg-slate-50/40 p-5 hover:bg-white hover:border-emerald-200 hover:shadow-sm transition-all flex flex-col justify-between space-y-4"
           >
-            <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between gap-2">
                 <span
-                  className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border ${act.categoryColor}`}
+                  className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${act.categoryColor}`}
                 >
                   {act.categoryLabel}
                 </span>
-                <span className="text-[11px] font-medium text-slate-500 flex items-center gap-1">
+                <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
                   {act.status}
                 </span>
               </div>
-              <h4 className="text-sm font-bold text-slate-800 leading-snug">{act.title}</h4>
-              <div className="mt-2 space-y-1 text-xs text-slate-500">
-                <div className="flex items-center gap-1.5">
+
+              <h4 className="text-base font-bold text-slate-900 leading-snug">{act.title}</h4>
+
+              {/* Event Location & Date */}
+              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                <span className="flex items-center gap-1">
                   <Calendar className="h-3.5 w-3.5 text-slate-400" />
-                  <span>{act.date}</span>
-                </div>
-                <div className="flex items-center gap-1.5">
+                  {act.date}
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
                   <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                  <span>{act.location}</span>
+                  {act.location}
+                </span>
+              </div>
+
+              {/* Story Narrative */}
+              <p className="text-xs text-slate-700 leading-relaxed bg-white/80 p-3 rounded-xl border border-slate-100">
+                {act.story}
+              </p>
+
+              {/* Elder Quote with emotional resonance */}
+              {act.elderQuote && (
+                <div className="rounded-xl border border-amber-100 bg-amber-50/50 p-3 text-xs text-amber-950 space-y-1">
+                  <div className="flex items-start gap-1.5 font-medium italic">
+                    <Quote className="h-3.5 w-3.5 text-amber-600 shrink-0 mt-0.5" />
+                    <span>"{act.elderQuote.quote}"</span>
+                  </div>
+                  <p className="text-[11px] text-amber-800 font-bold pl-5">
+                    — {act.elderQuote.author}, {act.elderQuote.neighborhood}
+                  </p>
                 </div>
+              )}
+
+              {/* Tangible Community Outcome */}
+              <div className="flex items-start gap-1.5 text-xs text-emerald-800 bg-emerald-50/70 rounded-lg p-2.5 font-medium">
+                <Sparkles className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                <span><strong>Impact Outcome:</strong> {act.communityOutcome}</span>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs">
-              <span className="flex items-center gap-1.5 font-medium text-slate-600">
-                <Users className="h-3.5 w-3.5 text-slate-400" />
-                {act.attendees} Participating Elders
+            <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs">
+              <span className="flex items-center gap-1.5 font-semibold text-slate-700">
+                <Users className="h-3.5 w-3.5 text-emerald-600" />
+                {act.attendeesCount} Participating Elders
               </span>
               {onFilterByActivity && (
                 <button
                   type="button"
                   onClick={() => onFilterByActivity(act.category)}
-                  className="font-semibold text-emerald-600 hover:text-emerald-700"
+                  className="font-bold text-emerald-700 hover:text-emerald-800"
                 >
-                  Filter elders &rarr;
+                  View participating elders &rarr;
                 </button>
               )}
             </div>

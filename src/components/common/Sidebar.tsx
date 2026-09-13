@@ -5,10 +5,11 @@ import {
   AlertCircle, 
   Calendar, 
   HeartHandshake,
+  Heart,
   Info
 } from 'lucide-react';
 
-export type NavItem = 'dashboard' | 'beneficiaries' | 'needs_attention' | 'activities' | 'volunteers';
+export type NavItem = 'dashboard' | 'beneficiaries' | 'needs_attention' | 'activities' | 'volunteers' | 'join_saathi';
 
 interface SidebarProps {
   currentTab: NavItem;
@@ -56,6 +57,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: 'Volunteer Network',
       icon: HeartHandshake,
       badge: null,
+    },
+    {
+      id: 'join_saathi' as NavItem,
+      label: 'Join Saathi Movement',
+      icon: Heart,
+      badge: 'Help',
+      badgeColor: 'bg-rose-100 text-rose-800 font-bold',
     },
   ];
 

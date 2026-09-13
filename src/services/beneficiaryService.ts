@@ -1,6 +1,7 @@
-import { Beneficiary, DashboardMetrics, Interaction, EngagementStatus, BeneficiaryFilters } from '../types/beneficiary';
-import { MOCK_BENEFICIARIES } from './mockData';
+import { Beneficiary, DashboardMetrics, Interaction, EngagementStatus, BeneficiaryFilters, CommunityActivity, Volunteer } from '../types/beneficiary';
+import { MOCK_BENEFICIARIES, MOCK_COMMUNITY_ACTIVITIES, MOCK_VOLUNTEERS } from './mockData';
 import { request } from './api';
+import { evaluateTriageSignal } from '../utils/triageLogic';
 
 // In-memory working copy to simulate real-time updates during coordinator sessions
 let workingBeneficiaries: Beneficiary[] = JSON.parse(JSON.stringify(MOCK_BENEFICIARIES));
@@ -208,7 +209,43 @@ export const beneficiaryService = {
       ben.needsAttentionReason = undefined;
     }
 
-    workingBeneficiaries[index] = { ...ben };
-    return JSON.parse(JSON.stringify(ben));
+    workingBeneficiaries[index] = { ...ben, triageSignal: evaluateTriageSignal(ben) };
+    return JSON.parse(JSON.stringify(workingBeneficiaries[index]));
+  },
+
+  /**
+   * Fetch all enriched community activities
+   */
+  async getCommunityActivities(): Promise<CommunityActivity[]> {
+    try {
+      const response = await request<CommunityActivity[]>('/activities');
+      if (Array.isArray(response) && response.length > 0) {
+        return response.map((a, i) => ({
+          ...MOCK_COMMUNITY_ACTIVITIES[i % MOCK_COMMUNITY_ACTIVITIES.length],
+          ...a,
+        }));
+      }
+    } catch {
+      // Fallback
+    }
+    return MOCK_COMMUNITY_ACTIVITIES;
+  },
+
+  /**
+   * Fetch all volunteers with spotlights and testimonials
+   */
+  async getVolunteers(): Promise<Volunteer[]> {
+    try {
+      const response = await request<Volunteer[]>('/volunteers');
+      if (Array.isArray(response) && response.length > 0) {
+        return response.map((v, i) => ({
+          ...MOCK_VOLUNTEERS[i % MOCK_VOLUNTEERS.length],
+          ...v,
+        }));
+      }
+    } catch {
+      // Fallback
+    }
+    return MOCK_VOLUNTEERS;
   },
 };
